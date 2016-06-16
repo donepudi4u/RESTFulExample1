@@ -1,6 +1,8 @@
 package com.myjavapapers.demo.rest;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -8,14 +10,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class FirstClass {
 
 	@RequestMapping(value = "/print")
-	public void printDetails(){
-		System.out.println("You are printing me");
+	public String printDetails(ModelMap model){
+		model.addAttribute("msg", "JCG Hello World!");
+		return "print";
 	}
 	
-	@RequestMapping(value = "/details")
-	public String getDetails(){
+	@RequestMapping(value = "/details/{msg}")
+	public String getDetails(@PathVariable String msg, ModelMap model){
+		model.addAttribute("msg", msg);
 		System.out.println("Testing me");
-		return "You are getting me";
+		return "print";
 	}
 	
 }
